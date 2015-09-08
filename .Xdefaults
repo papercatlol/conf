@@ -1,0 +1,5 @@
+XTerm*background: #111111
+XTerm*foreground: white
+xterm*faceName: xos4 Terminus:size=10
+xterm*saveLines: 2000
+xterm*termName: xterm-256color
