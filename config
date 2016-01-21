@@ -24,15 +24,15 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return split h, exec i3-sensible-terminal
-bindsym $mod+Shift+Return split v, exec i3-sensible-terminal 
+bindsym $mod+Return split h, exec --no-startup-id urxvt256c-ml
+bindsym $mod+Shift+Return split v, exec --no-startup-id urxvt256c-ml
 
 ## kill focused window
 #bindsym $mod+Shift+q kill
 bindsym $mod+w kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -i -p ">" -fn "-xos4-terminus-medium-r-*-*-14-*" -b -nf white -sb gray -sf black
+bindsym $mod+d exec --no-startup-id dmenu_run -i -p ">" -fn "-xos4-terminus-medium-r-*-*-14-*" -b -nf white -sb gray -sf black
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -88,38 +88,38 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+Shift+a focus child
 
-# switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+# switch to workspace number
+bindsym $mod+1 workspace number 1I
+bindsym $mod+2 workspace number 2II
+bindsym $mod+3 workspace number 3III
+bindsym $mod+4 workspace number 4IV
+bindsym $mod+5 workspace number 5V
+bindsym $mod+6 workspace number 6VI
+bindsym $mod+7 workspace number 7VII
+bindsym $mod+8 workspace number 8VIII
+bindsym $mod+9 workspace number 9IX
+bindsym $mod+0 workspace number 10X
 
 #go back to previous workspace pressing $mod+n again
 workspace_auto_back_and_forth yes
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+# move focused container to workspace number
+bindsym $mod+Shift+1 move container to workspace number 1I
+bindsym $mod+Shift+2 move container to workspace number 2II
+bindsym $mod+Shift+3 move container to workspace number 3III
+bindsym $mod+Shift+4 move container to workspace number 4IV
+bindsym $mod+Shift+5 move container to workspace number 5V
+bindsym $mod+Shift+6 move container to workspace number 6VI
+bindsym $mod+Shift+7 move container to workspace number 7VII
+bindsym $mod+Shift+8 move container to workspace number 8VIII
+bindsym $mod+Shift+9 move container to workspace number 9IX
+bindsym $mod+Shift+0 move container to workspace number 10X
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -167,7 +167,8 @@ bar {
     #modifier Mod5
     position bottom
     font xft:Terminus 8
-
+    strip_workspace_numbers yes
+ 
 colors {  
         background #151515
         #statusline #D7D0C7
@@ -182,11 +183,11 @@ colors {
 }
 #2 px border for new windows
 new_window pixel 2
-new_float normal
+new_float pixel 2
 
 #show/hide border on mod+/ and mod+?
-bindsym $mod+slash exec i3-msg border normal
-bindsym $mod+Shift+slash exec i3-msg border pixel 2
+bindsym $mod+slash exec --no-startup-id i3-msg border normal
+bindsym $mod+Shift+slash exec --no-startup-id i3-msg border pixel 2
 #wifi??
 exec --no-startup-id nm-applet
 #set brightness to minimal
@@ -194,12 +195,12 @@ exec --no-startup-id xbacklight -set 0
 #change layout
 #exec --no-startup-id setxkbmap -layout us,ru
 #exec --no-startup-id setxkbmap -option 'grp:shift_caps_toggle'
-exec --no-startup-id setxkbmap -layout us,ru -option 'caps:escape,grp:alt_space_toggle'
+#exec --no-startup-id setxkbmap -layout us,ru -option 'grp:alt_space_toggle'
 #bindsym Mod1+space --no-startup-id exec setxkbmap us    
 #background color
 #exec --no-startup-id xsetroot -solid "#333333"
 #wallpaper
-exec --no-startup-id nitrogen --restore 
+exec --no-startup-id feh --bg-max ~/Pictures/wallhaven-1167.jpg
 #focused tile color
 # class                 border  backgr. text    indicator 
 #default: client.focused          #4c7899 #285577 #ffffff #2e9ef4
@@ -209,9 +210,9 @@ client.focused_inactive #333333 #2d2d2d #ffffff #484e50
 #sound
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2%+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 2%- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
 #launch mc on fn+f3
-bindsym XF86Mail exec xterm mc
+bindsym XF86Mail exec --no-startup-id xterm mc
 
 #font
 #font pango: Monospace 10
@@ -219,7 +220,7 @@ font pango: DejaVu Sans Mono 10
 #hide edge borders
 hide_edge_borders vertical
 #assign firefox to workspace#2
-assign [class="Firefox"] 2
+assign [class="Firefox"] 2II
 for_window [class="Firefox"] border none
 #assign skype to workspace#3
 assign [class="Skype"] 3
@@ -230,8 +231,8 @@ focus_follows_mouse no
 #force_focus_wrapping yes|no
 #workspace_auto_back_and_forth yes|no
 #screenshot
-bindsym Print exec --no-startup-id import -window root ~/Pictures/screenshots/$(date +%F_%H%M%S_%N).png
-bindsym --release Shift+Print exec --no-startup-id import ~/Pictures/screenshots/$(date +%F_%H%M%S_%N).png
+bindsym Print exec --no-startup-id scrot ~/Pictures/screenshots/$(date +%F_%H%M%S_%N).png
+bindsym --release Shift+Print exec --no-startup-id scrot -s ~/Pictures/screenshots/$(date +%F_%H%M%S_%N).png
 
 #reboot, shutdown and shit menu
 set $mode_system System (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) power off
@@ -254,3 +255,5 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
+# i3-input on Mode+i
+bindsym $Mod+i exec --no-startup-id i3-input

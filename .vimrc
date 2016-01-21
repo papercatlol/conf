@@ -35,8 +35,8 @@ set incsearch		" do incremental searchleing
 set tabstop=4
 set shiftwidth=4
 set smarttab
-set expandtab "Ставим табы пробелами
-set softtabstop=4 "4 пробела в табе
+set expandtab "use spaces instead of tabs
+set softtabstop=4 "tab = 4 spaces 
 set nu "line numeration
 set  t_Co=256
 colorscheme jellybeans
@@ -60,6 +60,8 @@ vmap <Leader>P "+P
 "Space+Space for vim native autocompletion
 imap <C-Space> <C-x><C-i>
 imap <C-@> <C-Space>
+nnoremap <Leader>c :make %:r <CR>
+nnoremap <Leader>r :! ./%:r <CR>
 
 "dmenu thing. Fuck you nerdtree:
 function! Chomp(str)
