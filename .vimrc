@@ -57,12 +57,18 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+"Tab to navigate through tabs
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
 "Space+Space for vim native autocompletion
 imap <C-Space> <C-x><C-i>
 imap <C-@> <C-Space>
 nnoremap <Leader>c :make %:r <CR>
 nnoremap <Leader>r :! ./%:r <CR>
-
+set laststatus=2
+set statusline+=%F
+set ignorecase
+set smartcase 
 "dmenu thing. Fuck you nerdtree:
 function! Chomp(str)
  return substitute(a:str, '\n$', '', '')
