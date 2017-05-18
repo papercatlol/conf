@@ -154,9 +154,7 @@ if has("autocmd")
   autocmd FileType text setlocal textwidth=78
 
   " Emmet for html and css files
-  let g:user_emmet_install_global = 0
-  autocmd FileType html,css EmmetInstall
-
+  "
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
@@ -183,48 +181,7 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
-" Plugin stuff
-execute pathogen#infect()
-
-call plug#begin()
-Plug 'fatih/vim-go'
-Plug 'SirVer/ultisnips'
-call plug#end()
-
-" vim-go
-let g:go_auto_type_info = 1
-let g:go_auto_sameids = 1
-let g:go_fmt_command = "goimports"
-set autowrite
-
-function! s:clist_or_llist(cc, ll)
-    if empty(getloclist(0))
-        execute 'silent! ' . a:cc
-    else
-        execute 'silent! ' . a:ll
-    endif
-endfunction
-
-
 map <C-n> :<C-u>call <SID>clist_or_llist('cnext', 'lnext')<CR>
 map <C-p> :<C-u>call <SID>clist_or_llist('cprevious', 'lprevious')<CR>
 map <C-q> :<C-u>call <SID>clist_or_llist('cclose', 'lclose')<CR>
 map <Leader><CR> :<C-u>call <SID>clist_or_llist('cc', 'll')<CR>
-
-
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#cmd#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
-autocmd FileType go nmap gr <Plug>(go-run)
-autocmd FileType go nmap gor :<C-u>GoRun %<cr>
-autocmd FileType go nmap gb :<C-u>call <SID>build_go_files()<CR>
-" powerline
-"python3 from powerline.vim import setup as powerline_setup
-"python3 powerline_setup()
-"python3 del powerline_setup
