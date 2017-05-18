@@ -27,6 +27,8 @@ if has("vms")
 else
   set backup		" keep a backup file
 endif
+set dir=~/.vimbackup
+set wildmenu
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
@@ -41,6 +43,27 @@ set nu "line numeration
 set  t_Co=256
 colorscheme jellybeans
 let mapleader = "\<Space>"
+
+function! BuffersList()
+  let all = range(0, bufnr('$'))
+  let res = []
+  for b in all
+    if buflisted(b)
+      call add(res, bufname(b))
+    endif
+  endfor
+  return res
+endfunction
+
+"Dynamic title
+function! SetTitle(title)
+    execute 'silent !echo -ne "\033]0;"'.a:title.'"\a"' | redr!
+endfunction
+
+    let g:title = (v:servername != "" ? v:servername : "VIM") . ': ' . join(BuffersList(), '\|')
+autocmd VimEnter,BufAdd,BufDelete,BufUnload,BufWipeout * call SetTitle((v:servername != "" ? v:servername : "VIM")
+            \ . ': ' . join(BuffersList(), '\|'))
+autocmd VimLeave * call SetTitle("term")
 
 "%number%+Enter to go to the line %number%
 "Backspace to go to the beginning of the file
@@ -66,7 +89,7 @@ imap <C-@> <C-Space>
 nnoremap <Leader>c :make %:r <CR>
 nnoremap <Leader>r :! ./%:r <CR>
 set laststatus=2
-set statusline+=%F
+set statusline=%F
 set ignorecase
 set smartcase 
 "dmenu thing. Fuck you nerdtree:
@@ -130,6 +153,10 @@ if has("autocmd")
   " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
 
+  " Emmet for html and css files
+  let g:user_emmet_install_global = 0
+  autocmd FileType html,css EmmetInstall
+
   " When editing a file, always jump to the last known cursor position.
   " Don't do it when the position is invalid or when inside an event handler
   " (happens when dropping a file on gvim).
@@ -155,3 +182,49 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
+
+" Plugin stuff
+execute pathogen#infect()
+
+call plug#begin()
+Plug 'fatih/vim-go'
+Plug 'SirVer/ultisnips'
+call plug#end()
+
+" vim-go
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
+let g:go_fmt_command = "goimports"
+set autowrite
+
+function! s:clist_or_llist(cc, ll)
+    if empty(getloclist(0))
+        execute 'silent! ' . a:cc
+    else
+        execute 'silent! ' . a:ll
+    endif
+endfunction
+
+
+map <C-n> :<C-u>call <SID>clist_or_llist('cnext', 'lnext')<CR>
+map <C-p> :<C-u>call <SID>clist_or_llist('cprevious', 'lprevious')<CR>
+map <C-q> :<C-u>call <SID>clist_or_llist('cclose', 'lclose')<CR>
+map <Leader><CR> :<C-u>call <SID>clist_or_llist('cc', 'll')<CR>
+
+
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap gr <Plug>(go-run)
+autocmd FileType go nmap gor :<C-u>GoRun %<cr>
+autocmd FileType go nmap gb :<C-u>call <SID>build_go_files()<CR>
+" powerline
+"python3 from powerline.vim import setup as powerline_setup
+"python3 powerline_setup()
+"python3 del powerline_setup
