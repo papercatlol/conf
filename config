@@ -1,14 +1,17 @@
 set $mod Mod4
-set $term urxvt256c-ml
-
+set $term urxvtcd
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
+for_window [title="FTerm"] floating enable, resize grow up 300, resize grow down 300, resize grow left 75
 bindsym $mod+Return exec --no-startup-id $term
+bindsym $mod+Shift+Return exec --no-startup-id $term -title "FTerm"
+bindsym $mod+Alt+Return split h, exec --no-startup-id $term
 bindsym $mod+m exec --no-startup-id $term
+bindsym $mod+Shift+m exec --no-startup-id $term -title "FTerm" 
 
 ## kill focused window
 bindsym $mod+w kill
@@ -23,6 +26,7 @@ bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
+bindsym $mod+c focus output left
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -35,6 +39,7 @@ bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+c move output left
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -80,7 +85,7 @@ bindsym $mod+8 workspace number 8VIII
 bindsym $mod+9 workspace number 9IX
 bindsym $mod+0 workspace number 10X
 
-#go back to previous workspace pressing $mod+n again
+#go back to previous workspace pressing $mod+NUM again
 workspace_auto_back_and_forth yes
 # move focused container to workspace number
 bindsym $mod+Shift+1 move container to workspace number 1I
@@ -133,11 +138,39 @@ bindsym $mod+Shift+space resize grow height -10 px or -10 ppt, resize grow width
 
 
 bar {  
-    status_command i3status -c ~/.i3/i3status.conf
+    output HDMI1
+    tray_output HDMI1
+    strip_workspace_numbers yes
+    status_command i3status -c ~/.config/i3/i3status.conf
+    #status_command ~/.i3/status_test.py
+    #status_command ~/.i3/layout_status.sh
+    #mode hide
+    #hidden_state hide
+    #modifier Mod5
     position bottom
     font xft:Terminus 8
+    #font pango: Ubuntu Mono 9
+
+colors {  
+        background #151515
+        #statusline #D7D0C7
+        statusline #ffffff
+        separator #404040
+        # colors           border  bg      text
+        focused_workspace  #d3d7cf #babdb6 #3a3a3a
+        inactive_workspace #888a85 #151515 #D7D0C7
+        urgent_workspace   #ff0000 #151515 #D7D0C7
+        #urgent_workspace   #888a85 #ff7400 #D7D0C7
+    }
+}
+# SECONDARY MONITOR
+bar {  
+    output VGA1
+    tray_output none
     strip_workspace_numbers yes
- 
+    position top
+    font xft:Terminus 8
+
 colors {  
         background #151515
         statusline #ffffff
@@ -157,7 +190,9 @@ new_float pixel 2
 bindsym $mod+slash exec --no-startup-id i3-msg border normal
 bindsym $mod+Shift+slash exec --no-startup-id i3-msg border pixel 2
 #wallpaper
-exec --no-startup-id feh --bg-max ~/Pictures/wallhaven-1167.jpg
+exec --no-startup-id feh --bg-center ~/Pictures/wallhaven-1167.jpg
+#second monitor
+exec --no-startup-id xrandr --output VGA1 --auto --left-of HDMI1
 #focused tile color
 # class                 border  backgr. text    indicator 
 #default: client.focused          #4c7899 #285577 #ffffff #2e9ef4
@@ -167,7 +202,9 @@ client.focused_inactive #333333 #2d2d2d #ffffff #484e50
 #sound
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2%+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 2%- unmute
-bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
+bindsym XF86AudioMute exec amixer -q set Master toggle
+# screenlock
+bindsym $mod+Scroll_Lock exec --no-startup-id i3lock -c 111111 -d
 
 font pango: DejaVu Sans Mono 10
 hide_edge_borders vertical
@@ -177,7 +214,6 @@ for_window [class="Firefox"] border none, layout tabbed
 # imagemagic
 for_window [title="ImageMagick.*"] border none, floating enable
 #assign skype to workspace#3
-assign [class="Skype"] 9IX
 #focus_follows_mouse yes|no
 focus_follows_mouse no
 #force_focus_wrapping yes|no
