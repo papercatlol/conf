@@ -3,6 +3,13 @@
   URxvt*background:                     #111111
   URxvt*foreground:                     white
   URxvt*termName:                       screen-256color
+  xterm*scrollBar:                      False
+  xterm*faceName:				xft:terminus:size=12
+! xterm*faceName:Terminus:style=Regular:size=10
+  xterm*background:                     #111111
+  xterm*foreground:                     white
+  xterm*termName:                       term-256color
+  XTerm*locale: true
 ! URxvt*geometry:                       geometry
 ! URxvt*chdir:                          string
 ! URxvt*reverseVideo:                   boolean

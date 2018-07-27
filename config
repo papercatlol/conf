@@ -15,8 +15,7 @@ bindsym $mod+w kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run -i -p ">" -fn "-xos4-terminus-medium-r-*-*-14-*" -b -nf white -sb gray -sf black
-# rofi for window switching
-bindsym $mod+g exec --no-startup-id rofi -show window -modi window -location 7 -width 100 -lines 5
+bindsym $mod+Tab exec --no-startup-id rofi -show window -modi window -location 7 -width 100 -lines 10
 
 # change focus
 bindsym $mod+j focus left
@@ -139,37 +138,62 @@ bar {
     strip_workspace_numbers yes
  
 colors {  
-        background #151515
+        #background #151515
+        background #000000
+        #statusline #D7D0C7
         statusline #ffffff
-        separator #404040
+        # separator #404040
+        separator #696969
         # colors           border  bg      text
-        focused_workspace  #d3d7cf #babdb6 #3a3a3a
-        inactive_workspace #888a85 #151515 #D7D0C7
-        urgent_workspace   #ff0000 #151515 #D7D0C7
+        # focused_workspace  #d3d7cf #babdb6 #3a3a3a
+        # inactive_workspace #888a85 #151515 #D7D0C7
+        # urgent_workspace   #ff0000 #151515 #D7D0C7
+        focused_workspace  #000000 #ffffff #000000
+        inactive_workspace #ffffff #000000 #ffffff
+        urgent_workspace   #000000 #ff0000 #ffffff
         #urgent_workspace   #888a85 #ff7400 #D7D0C7
     }
 }
 #2 px border for new windows
-new_window pixel 2
+new_window pixel 1
 new_float pixel 2
 
 #show/hide border on mod+/ and mod+?
 bindsym $mod+slash exec --no-startup-id i3-msg border normal
 bindsym $mod+Shift+slash exec --no-startup-id i3-msg border pixel 2
+#wifi??
+exec --no-startup-id nm-applet
+#set brightness to minimal
+exec --no-startup-id xbacklight -set 0
+#change layout
+#exec --no-startup-id setxkbmap -layout us,ru
+#exec --no-startup-id setxkbmap -option 'grp:shift_caps_toggle'
+#exec --no-startup-id setxkbmap -layout us,ru -option 'grp:alt_space_toggle'
+#bindsym Mod1+space --no-startup-id exec setxkbmap us    
+#background color
+#exec --no-startup-id xsetroot -solid "#333333"
 #wallpaper
 exec --no-startup-id feh --bg-max ~/Pictures/wallhaven-1167.jpg
 #focused tile color
 # class                 border  backgr. text    indicator 
 #default: client.focused          #4c7899 #285577 #ffffff #2e9ef4
-client.focused          #000000 #FF3300 #ffffff #282828
-client.focused_inactive #333333 #2d2d2d #ffffff #484e50
+# client.focused          #696969 #babdb6 #3a3a3a #d3d7cf
+# client.focused          #000000 #FF3300 #ffffff #282828
+client.focused          #000000 #ffffff #000000 #d3d7cf #ffffff
+client.unfocused        #000000 #000000 #ffffff #333333 #000000
+client.focused_inactive #000000 #000000 #ffffff #484e50 #000000
+# client.focused_inactive #333333 #2d2d2d #ffffff #484e50
 #ff3300
 #sound
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2%+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 2%- unmute
 bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
 
-font pango: DejaVu Sans Mono 10
+#font
+#font pango: Monospace 10
+font xft: Terminus 12
+#font pango: DejaVu Sans Mono 10
+#hide edge borders
 hide_edge_borders vertical
 #assign firefox to workspace#2
 assign [class="Firefox"] 2II
