@@ -1,5 +1,5 @@
 set $mod Mod4
-set $term urxvt256c-ml
+set $term urxvt
 
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
@@ -14,8 +14,8 @@ bindsym $mod+m exec --no-startup-id $term
 bindsym $mod+w kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -i -p ">" -fn "-xos4-terminus-medium-r-*-*-14-*" -b -nf white -sb gray -sf black
-bindsym $mod+Tab exec --no-startup-id rofi -show window -modi window -location 7 -width 100 -lines 10
+bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+Tab exec --no-startup-id rofi -show window
 
 # change focus
 bindsym $mod+j focus left
@@ -131,8 +131,9 @@ bindsym $mod+space resize grow height 10 px or 10 ppt, resize grow width 10 px o
 bindsym $mod+Shift+space resize grow height -10 px or -10 ppt, resize grow width -10 px or -10 ppt
 
 
-bar {  
-    status_command i3status -c ~/.i3/i3status.conf
+bar {
+    i3bar_command i3bar
+    status_command i3status -c "~/conf/i3status.conf"
     position bottom
     font xft:Terminus 8
     strip_workspace_numbers yes
@@ -161,19 +162,15 @@ new_float pixel 2
 #show/hide border on mod+/ and mod+?
 bindsym $mod+slash exec --no-startup-id i3-msg border normal
 bindsym $mod+Shift+slash exec --no-startup-id i3-msg border pixel 2
-#wifi??
+
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id nm-applet
-#set brightness to minimal
-exec --no-startup-id xbacklight -set 0
-#change layout
-#exec --no-startup-id setxkbmap -layout us,ru
-#exec --no-startup-id setxkbmap -option 'grp:shift_caps_toggle'
-#exec --no-startup-id setxkbmap -layout us,ru -option 'grp:alt_space_toggle'
-#bindsym Mod1+space --no-startup-id exec setxkbmap us    
-#background color
-#exec --no-startup-id xsetroot -solid "#333333"
-#wallpaper
-exec --no-startup-id feh --bg-max ~/Pictures/wallhaven-1167.jpg
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id conky -c /usr/share/conky/conky_grey
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
+
 #focused tile color
 # class                 border  backgr. text    indicator 
 #default: client.focused          #4c7899 #285577 #ffffff #2e9ef4
@@ -194,21 +191,52 @@ bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
 font xft: Terminus 12
 #font pango: DejaVu Sans Mono 10
 #hide edge borders
-hide_edge_borders vertical
-#assign firefox to workspace#2
+gaps inner 10
+gaps outer -4
+smart_gaps on
+smart_borders on
+# hide_edge_borders vertical
+
+
 assign [class="Firefox"] 2II
 for_window [class="Firefox"] border none, layout tabbed
-# imagemagic
 for_window [title="ImageMagick.*"] border none, floating enable
-#assign skype to workspace#3
-assign [class="Skype"] 9IX
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Calamares"] floating enable border normal
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="GParted"] floating enable border normal
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lightdm-gtk-greeter-settings"] floating enable
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Manjaro-hello"] floating enable
+for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Oblogout"] fullscreen enable
+for_window [class="octopi"] floating enable
+for_window [title="About Pale Moon"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Skype"] floating enable border normal
+for_window [class="Thus"] floating enable border normal
+for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="Xfburn"] floating enable
+
+
 #focus_follows_mouse yes|no
 focus_follows_mouse no
 #force_focus_wrapping yes|no
 #workspace_auto_back_and_forth yes|no
 #screenshot
-bindsym Print exec --no-startup-id scrot ~/Pictures/screenshots/$(date +%F_%H%M%S_%N).png
-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/Pictures/screenshots/$(date +%F_%H%M%S_%N).png
+bindsym Print --release exec --no-startup-id i3-scrot ~/Pictures/screenshots/$(date +%F_%H%M%S_%N).png
+bindsym --release Shift+Print exec --no-startup-id i3-scrot -s ~/Pictures/screenshots/$(date +%F_%H%M%S_%N).png
 #reboot, shutdown and shit menu
 set $mode_system System (e) logout, (s) suspend, (h) hibernate, (r) reboot, (p) power off
 mode "$mode_system" {
@@ -232,3 +260,7 @@ bindsym $mod+minus scratchpad show
 
 # i3-input on Mode+i
 bindsym $Mod+i exec --no-startup-id i3-input
+
+# volume control
+exec --no-startup-id volumeicon
+bindsym Menu exec terminal -e 'alsamixer'

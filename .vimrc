@@ -41,7 +41,7 @@ set expandtab "use spaces instead of tabs
 set softtabstop=4 "tab = 4 spaces 
 set nu "line numeration
 set  t_Co=256
-colorscheme jellybeans
+" colorscheme jellybeans
 let mapleader = "\<Space>"
 
 function! BuffersList()
@@ -184,12 +184,12 @@ if !exists(":DiffOrig")
 endif
 
 " Plugin stuff
-execute pathogen#infect()
+" execute pathogen#infect()
 
-call plug#begin()
-Plug 'fatih/vim-go'
-Plug 'SirVer/ultisnips'
-call plug#end()
+" call plug#begin()
+" Plug 'fatih/vim-go'
+" Plug 'SirVer/ultisnips'
+" call plug#end()
 
 " vim-go
 let g:go_auto_type_info = 1

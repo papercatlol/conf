@@ -12,9 +12,14 @@ fi
 stty -ixon
 
 alias ..='cd ..'
-alias vim='vimx'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ll='ls -l'
 alias la='ls -la'
 
 PROMPT_COMMAND=
 PS1="[\u@\H:\w]\n\$ "
 EDITOR='vim'
+
+shopt -s checkwinsize
