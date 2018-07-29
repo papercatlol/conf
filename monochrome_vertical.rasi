@@ -1,1 +1,57 @@
-/home/il/.config/rofi/monochrome_vertical.rasi
+* {
+    font: "xft:Terminus 12";
+    text-color:  #ffffff;
+    background-color:  rgba(0,0,0);
+    black:       #000000;
+    white:       #ffffff;
+}
+
+#window {
+    fullscreen: false;
+    location: south west;
+    anchor:   south west;
+    y-offset: -1em;
+    border:  1px 1px 1px 1px;
+    border-color: @white;
+    padding: 0px 2px 2px 2px;
+    orientation: vertical;
+    width: 25ch;
+    children: [inputbar, listview];
+}
+
+#inputbar {
+    children: [ prompt,textbox-prompt-colon,entry,case-indicator ];
+    border: 0px dash 0px dash 1px dash 0px dash;
+    border-color: @white;
+}
+
+#prompt {
+  text-color: bold White;
+  padding: 0px 0px 0px 0px;
+}
+
+#textbox-prompt-colon {
+  str: ":";
+  expand: false;
+  text-color: @white;
+  padding: 0px 2px 0px 0px;
+}
+
+#listview {
+    dynamic: false;
+    lines: 10;
+    scrollbar: true;
+    spacing: 0px;
+}
+
+#scrollbar {
+    width:        4px ;
+    handle-width: 4px ;
+    handle-color: @white;
+}
+
+#element selected {
+    background-color: @white;
+    text-color: @black;
+}
+
