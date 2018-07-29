@@ -11,6 +11,8 @@ fi
 # User specific aliases and functions
 stty -ixon
 
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -18,8 +20,8 @@ alias .....='cd ../../../..'
 alias ll='ls -l'
 alias la='ls -la'
 
-PROMPT_COMMAND=
-PS1="[\u@\H:\w]\n\$ "
-EDITOR='vim'
+# PROMPT_COMMAND=
+# PS1="[\u@\H:\w]\n\$ "
+# EDITOR='vim'
 
 shopt -s checkwinsize
