@@ -1,0 +1,4 @@
+--max-columns=160
+--smart-case
+--context-separator=\n                                *      *      *\n
+--max-columns=160

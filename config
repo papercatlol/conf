@@ -18,6 +18,7 @@ bindsym $mod+w kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id dmenu_run -i -p ">" -fn "-xos4-terminus-medium-r-*-*-14-*" -b -nf white -sb gray -sf black
+bindsym $mod+Shift+d exec --no-startup-id rofi -show drun -location 1 -width 240
 # rofi for window switching
 bindsym $mod+g exec --no-startup-id rofi -show window -modi window -location 7 -width 100 -lines 5
 
@@ -153,14 +154,13 @@ bar {
 
 colors {  
         background #151515
-        #statusline #D7D0C7
-        statusline #ffffff
+        statusline #bbbbbb
+        #statusline #ffffff
         separator #404040
         # colors           border  bg      text
-        focused_workspace  #d3d7cf #babdb6 #3a3a3a
+        focused_workspace  #000000 #babdb6 #3a3a3a
         inactive_workspace #888a85 #151515 #D7D0C7
-        urgent_workspace   #ff0000 #151515 #D7D0C7
-        #urgent_workspace   #888a85 #ff7400 #D7D0C7
+        urgent_workspace   #ff0000 #ff0000 #ffffff
     }
 }
 # SECONDARY MONITOR
@@ -176,14 +176,16 @@ colors {
         statusline #ffffff
         separator #404040
         # colors           border  bg      text
-        focused_workspace  #d3d7cf #babdb6 #3a3a3a
+        focused_workspace  #000000 #babdb6 #3a3a3a
+        # focused_workspace  #d3d7cf #babdb6 #3a3a3a
         inactive_workspace #888a85 #151515 #D7D0C7
-        urgent_workspace   #ff0000 #151515 #D7D0C7
+        urgent_workspace   #ff0000 #ff0000 #ffffff
+        #urgent_workspace   #ff0000 #151515 #D7D0C7
         #urgent_workspace   #888a85 #ff7400 #D7D0C7
     }
 }
 #2 px border for new windows
-new_window pixel 2
+new_window pixel 1
 new_float pixel 2
 
 #show/hide border on mod+/ and mod+?
@@ -192,12 +194,14 @@ bindsym $mod+Shift+slash exec --no-startup-id i3-msg border pixel 2
 #wallpaper
 exec --no-startup-id feh --bg-center ~/Pictures/wallhaven-1167.jpg
 #second monitor
-exec --no-startup-id xrandr --output VGA1 --auto --left-of HDMI1
+exec --no-startup-id xrandr --output VGA1 --auto --left-of HDMI1 --rotate left
 #focused tile color
 # class                 border  backgr. text    indicator 
 #default: client.focused          #4c7899 #285577 #ffffff #2e9ef4
-client.focused          #000000 #FF3300 #ffffff #282828
+# client.focused          #000000 #FF3300 #ffffff #282828
+client.focused          #000000 #bbbbbb #000000 #282828
 client.focused_inactive #333333 #2d2d2d #ffffff #484e50
+
 #ff3300
 #sound
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 2%+ unmute
