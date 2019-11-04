@@ -1,0 +1,40 @@
+" Removing a line will make the setting disappear
+sanitise tridactyllocal tridactylsync
+
+colors dark
+
+bind K tabprev
+bind J tabnext
+" Git{Hub,Lab} git clone via SSH yank
+bind yg composite js document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
+
+" Allow Ctrl-c to copy in the commandline
+unbind --mode=ex <C-c>
+
+" Only hint search results on Google and DDG
+" bindurl www.google.com f hint -Jc .rc > .r > a
+" bindurl www.google.com F hint -Jbc .rc>.r>a
+
+" bindurl ^https://duckduckgo.com f hint -Jc [class=result__a]
+" bindurl ^https://duckduckgo.com F hint -Jbc [class=result__a]
+
+" Default search
+unbind <C-f>
+
+" Youtube player binds
+unbindurl youtube.com j
+unbindurl youtube.com k
+unbindurl youtube.com l
+
+" C-p. C-n can't be overriden because firefox reasons
+bind --mode=ex <C-p> ex.prev_history
+bind --mode=ex <A-j> ex.next_completion
+bind --mode=ex <A-k> ex.prev_completion
+
+" Search engines
+set searchurls.r   https://old.reddit.com/r/%s
+set searchurls.w   https://en.wikipedia.org/w/index.php?search=%s
+set searchurls.wd  https://en.wiktionary.org/wiki/?search=%s
+set searchurls.d   https://duckduckgo.com/?q=%s
+set searchurls.yt  https://www.youtube.com/results?search_query=%s
+set searchurls.map https://www.google.com/maps/search/%s
