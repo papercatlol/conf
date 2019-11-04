@@ -1,10 +1,11 @@
   URxvt*scrollBar:                      False
-  URxvt*font:				xft:terminus:size=12
-  URxvt*background:                     #111111
+  URxvt*font:				xft:xos4terminus:size=12
+  URxvt*background:                     black
+  ! URxvt*background:                     #111111
   URxvt*foreground:                     white
   URxvt*termName:                       screen-256color
   xterm*scrollBar:                      False
-  xterm*faceName:				xft:terminus:size=12
+  xterm*faceName:				xft:xos4terminus:size=12
 ! xterm*faceName:Terminus:style=Regular:size=10
   xterm*background:                     #111111
   xterm*foreground:                     white
