@@ -15,7 +15,7 @@
     border-color: @white;
     padding: 0px 2px 2px 2px;
     orientation: vertical;
-    width: 25ch;
+    // width: 25ch;
     children: [inputbar, listview];
 }
 

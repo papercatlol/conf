@@ -1,0 +1,10 @@
+rofi.theme: ~/.config/rofi/monochrome_vertical.rasi
+rofi.kb-row-select:                  Tab
+rofi.kb-row-tab:
+rofi.kb-row-down: Alt-j,Ctrl-n
+rofi.kb-row-up: Alt-k,Ctrl-p
+rofi.kb-row-first: Alt-less
+rofi.kb-row-last: Alt-greater
+rofi.kb-clear-line:
+rofi.kb-remove-word-back: Alt-BackSpace,Ctrl-BackSpace,Ctrl-w
+rofi.kb-remove-word-forward: Alt-d
