@@ -19,3 +19,7 @@ shopt -s checkwinsize
 function e {
     emacsclient -n "$@" &!
 }
+
+function iconv_cyrillic {
+    iconv -t latin1 "$1" | iconv -f cp1251 -t utf-8
+}
