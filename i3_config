@@ -200,9 +200,9 @@ smart_borders on
 # hide_edge_borders vertical
 
 
-assign [class="Firefox"] 2II
+assign [class="Mozilla Firefox"] 2II
 assign [class="Chromium"] 2II
-for_window [class="Firefox"] border none, layout tabbed
+for_window [class="Mozilla Firefox"] border none, layout tabbed
 for_window [class="Emacs"] layout tabbed
 for_window [title="ImageMagick.*"] border none, floating enable
 for_window [title="alsamixer"] floating enable border pixel 1
@@ -273,3 +273,10 @@ bindsym Menu exec terminal -e 'alsamixer'
 # emacs
 bindsym $Mod+x exec --no-startup-id emacsclient -a "" -c -n
 bindsym $Mod+Shift+x exec --no-startup-id emacsclient -a "" -c -n && i3-msg floating enable
+
+## equake
+for_window [title="\*EQUAKE\*.*"] floating enable, resize set width 1919 px height 600 px, move position 0 0
+bindsym $Mod+equal exec --no-startup-id emacsclient -a "" -n -e '(equake-invoke)'
+
+# xcape
+exec --no-startup-id killall xcape && xcape -e 'Shift_L=parenleft;Control_L=Escape'
