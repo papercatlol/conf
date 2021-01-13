@@ -14,6 +14,9 @@ alias xe='emacsclient -t'
 PROMPT_COMMAND=
 PS1="[\u@\H:\w]\n\$ "
 
+export EDITOR='emacsclient -t'
+export VISUAL='emacsclient -c -a emacs'
+
 shopt -s checkwinsize
 
 function e {

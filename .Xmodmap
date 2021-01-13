@@ -1,1 +1,14 @@
-pointer = 1 2 3 5 4 7 6 8 9 10 11 12
+! # xmodmap
+! ## add Right Shift as a Hyper key
+! xmodmap -e 'keysym Shift_R = Hyper_R' -e 'remove shift = Hyper_R' -e 'add mod3 = Hyper_R'
+
+keysym Shift_R = Hyper_R
+remove shift = Hyper_R
+add mod3 = Hyper_R
+
+! enable F13 key
+keycode 191 = F13 F13 F13
+
+! reverse mouse scrolling (for laptop)
+! pointer = 1 2 3 5 4 7 6 8 9 10 11 12
+

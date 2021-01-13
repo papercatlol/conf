@@ -150,7 +150,7 @@ colors {
         # focused_workspace  #d3d7cf #babdb6 #3a3a3a
         # inactive_workspace #888a85 #151515 #D7D0C7
         # urgent_workspace   #ff0000 #151515 #D7D0C7
-        focused_workspace  #000000 #ffffff #000000
+        focused_workspace  #ffffff #babdb6 #000000
         inactive_workspace #ffffff #000000 #ffffff
         urgent_workspace   #000000 #ff0000 #ffffff
         #urgent_workspace   #888a85 #ff7400 #D7D0C7
@@ -274,9 +274,22 @@ bindsym Menu exec terminal -e 'alsamixer'
 bindsym $Mod+x exec --no-startup-id emacsclient -a "" -c -n
 bindsym $Mod+Shift+x exec --no-startup-id emacsclient -a "" -c -n && i3-msg floating enable
 
+# firefox new window
+bindsym $Mod+n exec --no-startup-id firefox --new-window
+bindsym $Mod+p exec --no-startup-id firefox --private-window
+
 ## equake
 for_window [title="\*EQUAKE\*.*"] floating enable, resize set width 1919 px height 600 px, move position 0 0
 bindsym $Mod+equal exec --no-startup-id emacsclient -a "" -n -e '(equake-invoke)'
 
 # xcape
-exec --no-startup-id killall xcape && xcape -e 'Shift_L=parenleft;Control_L=Escape'
+## Left Shift    (
+## Left Control  -
+## Right Hyper   numlock /
+exec --no-startup-id killall xcape; xcape -e 'Shift_L=parenleft;Control_L=minus;Hyper_R=F13'
+
+# i3lock
+bindsym $Mod+Scroll_Lock exec --no-startup-id i3lock -c 000000
+
+# imagemagick display
+for_window [class="(?i)display"] move position center
